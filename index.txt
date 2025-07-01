@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prathiksha Narayanan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0ead6; /* Ivory color */
+            font-size: 18px;
+            /* --- START: UPDATED BACKGROUND IMAGE STYLES --- */
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Scenery image URL */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Keeps the background fixed when scrolling */
+            position: relative;
+            z-index: 1;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better readability */
+            z-index: -1;
+        }
+        /* --- END: UPDATED BACKGROUND IMAGE STYLES --- */
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            text-align: left;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: normal;
+            color: #fff; /* Changed logo color to white */
+            text-decoration: none;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .intro {
+            margin-bottom: 80px;
+        }
+
+        .intro h1 {
+            font-size: 48px;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: #fff; /* Changed heading color to white */
+        }
+
+        .intro .highlight {
+            color: #007acc;
+        }
+
+        .intro p {
+            font-size: 24px;
+            color: #ddd; /* Changed paragraph color to light gray */
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            margin: 60px 0;
+            border-top: 1px solid #555; /* Darker border */
+            border-bottom: 1px solid #555; /* Darker border */
+            padding: 30px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #fff; /* Changed link color to white */
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 300;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #007acc;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: #007acc;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            margin: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: normal;
+            margin-bottom: 40px;
+            color: #fff; /* Changed section title color to white */
+            border-bottom: 1px solid #555; /* Darker border */
+            padding-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .about-text h3 {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: #fff; /* Changed heading color to white */
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ddd; /* Changed paragraph color to light gray */
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            padding: 30px;
+            background: #333; /* Darker background */
+            border-radius: 8px;
+        }
+
+        .contact-info h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff; /* Changed heading color to white */
+            font-weight: normal;
+        }
+
+        .contact-info p {
+            margin: 8px 0;
+            color: #ddd; /* Changed paragraph color to light gray */
+        }
+
+        .contact-info a {
+            color: #007acc;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .skill-category h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fff; /* Changed heading color to white */
+            font-weight: normal;
+            border-bottom: 1px solid #555; /* Darker border */
+            padding-bottom: 10px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 8px 0;
+            color: #ddd; /* Changed list item color to light gray */
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-category li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #007acc;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #555; /* Darker border */
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .education-title {
+            font-size: 22px;
+            font-weight: normal;
+            color: #fff; /* Changed title color to white */
+            margin-bottom: 5px;
+        }
+
+        .education-institution {
+            font-size: 18px;
+            color: #007acc;
+            margin-bottom: 10px;
+        }
+
+        .education-period {
+            font-size: 16px;
+            color: #999;
+            white-space: nowrap;
+        }
+
+        .education-description {
+            color: #ddd; /* Changed description color to light gray */
+            margin-top: 15px;
+        }
+
+        /* Certifications Section */
+        .cert-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cert-item {
+            padding: 30px;
+            background: #333; /* Darker background */
+            border-radius: 8px;
+            border-left: 4px solid #007acc;
+        }
+
+        .cert-title {
+            font-size: 20px;
+            font-weight: normal;
+            color: #fff; /* Changed title color to white */
+            margin-bottom: 10px;
+        }
+
+        .cert-provider {
+            font-size: 16px;
+            color: #007acc;
+            margin-bottom: 5px;
+        }
+
+        .cert-date {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .cert-description {
+            color: #ddd; /* Changed description color to light gray */
+            line-height: 1.6;
+        }
+
+        /* Languages */
+        .languages {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .language-item {
+            text-align: center;
+        }
+
+        .language-name {
+            font-size: 18px;
+            color: #fff; /* Changed language name color to white */
+            margin-bottom: 5px;
+        }
+
+        .language-level {
+            font-size: 14px;
+            color: #ddd; /* Changed language level color to light gray */
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff; /* Changed label color to white */
+            font-size: 16px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #555; /* Darker border */
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Georgia, serif;
+            transition: border-color 0.3s ease;
+            background-color: #444; /* Darker input background */
+            color: #fff; /* Input text color white */
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007acc;
+        }
+
+        .submit-btn {
+            background: #007acc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: Georgia, serif;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid #555; /* Darker border */
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .intro h1 {
+                font-size: 36px;
+            }
+
+            .intro p {
+                font-size: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin: 0 auto;
+            }
+
+            .education-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .languages {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">Prathiksha Narayanan</a>
+            
+            <div class="intro">
+                <h1>I'm <span class="highlight">Prathiksha</span>.</h1>
+                <p>I'm an AI enthusiast, problem solver, and continuous learner.</p>
+                <p>I'm a Computer Science Engineering student passionate about artificial intelligence and emerging technologies.</p>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <section id="about">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="profile-image">
+                    <img src="Ammulu 1-min.jpg" alt="Prathiksha Narayanan Profile Picture"> 
+                </div>
+                <div class="about-text">
+                    <h3>Hello, I'm Prathiksha</h3>
+                    <p>I'm a passionate Computer Science Engineering student at GKM College of Engineering and Technology, currently in my final year. My journey in technology has been driven by curiosity and a strong commitment to continuous learning.</p>
+                    
+                    <p>I specialize in AI technologies and have completed multiple certifications in Generative AI, machine learning tools, and advanced programming. I'm known for my analytical thinking, exceptional communication skills, and ability to adapt quickly to new environments.</p>
+                    
+                    <p>My goal is to contribute meaningfully to innovative tech solutions while growing professionally in the rapidly evolving field of artificial intelligence and computer science.</p>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <h4>Get in touch</h4>
+                <p><strong>Email:</strong> <a href="mailto:prathikshapriya5@gmail.com">prathikshapriya5@gmail.com</a></p>
+                <p><strong>Phone:</strong> +91 6379465475</p>
+                <p><strong>Location:</strong> Chennai, Tamil Nadu, India</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/prathiksha-narayanan" target="_blank">linkedin.com/in/prathiksha-narayanan</a></p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Technical Skills</h4>
+                    <ul>
+                        <li>AI Tools & Technologies</li>
+                        <li>Generative AI Applications</li>
+                        <li>ChatGPT & AI Productivity Tools</li>
+                        <li>Programming & Problem-solving</li>
+                        <li>Computer Science Fundamentals</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Soft Skills</h4>
+                    <ul>
+                        <li>Leadership</li>
+                        <li>Teamwork & Collaboration</li>
+                        <li>Communication Skills</li>
+                        <li>Organizational Skills</li>
+                        <li>Flexible & Adaptable</li>
+                        <li>Dependable & Responsible</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Personal Attributes</h4>
+                    <ul>
+                        <li>Friendly, Positive Attitude</li>
+                        <li>Analytical Thinking</li>
+                        <li>Quick Learner</li>
+                        <li>Detail-oriented</li>
+                        <li>Growth Mindset</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 60px; margin-bottom: 20px; font-size: 24px; font-weight: normal; color: #fff;">Languages</h3>
+            <div class="languages">
+                <div class="language-item">
+                    <div class="language-name">English</div>
+                    <div class="language-level">Fluent</div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">Tamil</div>
+                    <div class="language-level">Native</div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">Hindi</div>
+                    <div class="language-level">Intermediate</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="education-title">Bachelor of Engineering</div>
+                        <div class="education-institution">Computer Science Engineering</div>
+                        <div style="color: #666; margin-top: 5px;">GKM College of Engineering and Technology</div>
+                    </div>
+                    <div class="education-period">2022 - 2026</div>
+                </div>
+                <div class="education-description">
+                    Currently pursuing my BE in Computer Science Engineering with a focus on emerging technologies, particularly AI and machine learning applications.
+                </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="education-title">CCBP 4.0 Industrial Revolution</div>
+                        <div class="education-institution">NxtWave Academy</div>
+                    </div>
+                    <div class="education-period">2022 - 2026</div>
+                </div>
+                <div class="education-description">
+                    Comprehensive program covering modern programming practices, industry-relevant skills, and cutting-edge technologies preparing for the digital transformation era.
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-title">AI Mastermind Workshop</div>
+                    <div class="cert-provider">Outskill</div>
+                    <div class="cert-date">May 2025</div>
+                    <div class="cert-description">Comprehensive workshop covering a wide range of AI tools, from Suno AI to VFX and more, providing a broad understanding of diverse AI applications.</div>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-title">AI Tools and ChatGPT Workshop</div>
+                    <div class="cert-provider">be10x</div>
+                    <div class="cert-date">December 2024</div>
+                    <div class="cert-description">Gained comprehensive knowledge about ChatGPT and various other AI tools designed to streamline and simplify work processes.</div>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-title">How to Gain Career Advantage with Generative AI Tools</div>
+                    <div class="cert-provider">NxtWave Academy</div>
+                    <div class="cert-date">December 2024</div>
+                    <div class="cert-description">Building on prior knowledge of Generative AI, this program focused on detailed exploration of specific tools used for generating AI content.</div>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-title">Generative AI Mega Workshop 2.0</div>
+                    <div class="cert-provider">NxtWave Academy</div>
+                    <div class="cert-date">September 2024</div>
+                    <div class="cert-description">Introduction to Generative AI, covering fundamental concepts and various tools that can be utilized in the field of artificial intelligence.</div>
+                </div>
+                
+                <div class="cert-item">
+                    <div class="cert-title">NxtCode - 7 Under 7 Challenge</div>
+                    <div class="cert-provider">NxtWave Academy</div>
+                    <div class="cert-date">September 2024</div>
+                    <div class="cert-description">7-day intensive coding challenge solving problems across easy, medium, difficult, and very difficult levels, significantly enhancing problem-solving skills.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666;">
+                I'm always open to discussing new opportunities, collaborations, or just having a conversation about AI and technology.
+            </p>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Prathiksha Narayanan. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Contact form submission
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:prathikshapriya5@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('Opening your email client to send the message!');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better readability */
+    z-index: -1;
+}
